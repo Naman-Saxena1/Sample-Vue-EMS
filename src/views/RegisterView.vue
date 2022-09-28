@@ -1,52 +1,48 @@
-<script setup>
-
-</script>
-
 <template>
   <main>
-    <form>
+    <form @submit.prevent="handleRegisterFormSubmit">
       <h2>Register New Employee</h2>
 
       <div class="form-input-container">
         <label for="name"><h3>Full Name</h3></label>
-        <input class="form-inputs" type="text" id="name"/>
+        <input class="form-inputs" type="text" id="name" v-model.trim="registerFormValues.name" required/>
       </div>
 
       <div class="form-input-container">
         <label for="empid"><h3>Employee Id</h3></label>
-        <input class="form-inputs" type="text" id="empid" maxlength="6"/>
+        <input class="form-inputs" type="text" id="empid" maxlength="6" v-model.trim="registerFormValues.empid" required/>
       </div>
       
       <div class="form-input-container">
         <label for="age"><h3>Age</h3></label>
-        <input class="form-inputs" type="number" id="age" min="0"/>
+        <input class="form-inputs" type="number" id="age" min="0" v-model.number="registerFormValues.age"/>
       </div>
       
       <div class="form-input-container">
         <label for="designation"><h3>Designation</h3></label>
-        <input class="form-inputs" type="text" id="designation"/>
+        <input class="form-inputs" type="text" id="designation" v-model="registerFormValues.designation"/>
       </div>
       
       <div class="form-input-container">
         <label><h3>Years Of Experience</h3></label>
 
         <div class="yoe-radio-container">
-          <input class="form-inputs" type="radio" value="0-2" id="0-2yoe"/>
+          <input class="form-inputs" type="radio" value="0-2" id="0-2yoe" v-model="registerFormValues.yearsOfExperience"/>
           <label for="0-2yoe">0-2</label>
         </div>
 
         <div class="yoe-radio-container">
-          <input class="form-inputs" type="radio" value="3-5" id="3-5yoe"/>
+          <input class="form-inputs" type="radio" value="3-5" id="3-5yoe" v-model="registerFormValues.yearsOfExperience"/>
           <label for="3-5yoe">3-5</label>
         </div>
         
         <div class="yoe-radio-container">
-          <input class="form-inputs" type="radio" value="5-10" id="5-10yoe"/>
+          <input class="form-inputs" type="radio" value="5-10" id="5-10yoe" v-model="registerFormValues.yearsOfExperience"/>
           <label for="5-10yoe">5-10</label>
         </div>
        
         <div class="yoe-radio-container"> 
-          <input class="form-inputs" type="radio" value="10+" id="10+yoe"/>
+          <input class="form-inputs" type="radio" value="10+" id="10+yoe" v-model="registerFormValues.yearsOfExperience"/>
           <label for="10+yoe">10+</label>
         </div>
       </div>
@@ -55,32 +51,32 @@
         <label for="skills"><h3>Skills</h3></label>
         
         <div class="yoe-checkbox-container">
-          <input class="form-inputs" type="checkbox" value="html" id="html"/>
+          <input class="form-inputs" type="checkbox" value="HTML" id="html" v-model="registerFormValues.skills"/>
           <label for="html">HTML</label>
         </div>
        
         <div class="yoe-checkbox-container"> 
-          <input class="form-inputs" type="checkbox" value="css" id="css"/>
+          <input class="form-inputs" type="checkbox" value="CSS" id="css" v-model="registerFormValues.skills"/>
           <label for="css">CSS</label>
         </div>
        
         <div class="yoe-checkbox-container"> 
-          <input class="form-inputs" type="checkbox" value="javascript" id="javascript"/>
+          <input class="form-inputs" type="checkbox" value="Javascript" id="javascript" v-model="registerFormValues.skills"/>
           <label for="javascript">JavaScript</label>
         </div>
        
         <div class="yoe-checkbox-container"> 
-          <input class="form-inputs" type="checkbox" value="react" id="react"/>
+          <input class="form-inputs" type="checkbox" value="React.js" id="react" v-model="registerFormValues.skills"/>
           <label for="react">React.js</label>
         </div>
        
         <div class="yoe-checkbox-container"> 
-          <input class="form-inputs" type="checkbox" value="redux" id="redux"/>
+          <input class="form-inputs" type="checkbox" value="Redux" id="redux" v-model="registerFormValues.skills"/>
           <label for="redux">Redux</label>
         </div>
        
         <div class="yoe-checkbox-container"> 
-          <input class="form-inputs" type="checkbox" value="next" id="next"/>
+          <input class="form-inputs" type="checkbox" value="Next.js" id="next" v-model="registerFormValues.skills"/>
           <label for="next">Next.js</label>
         </div>
       </div>
@@ -89,6 +85,40 @@
     </form>
   </main>
 </template>
+
+<script>
+  import axios from 'axios';
+  
+  const initialFormValue = {
+          name: '',
+          empid: '',
+          age: '',
+          designation: '',
+          yearsOfExperience: '',
+          skills: []
+        }
+  export default {
+    data()
+    {
+      return {
+        registerFormValues : JSON.parse(JSON.stringify(initialFormValue))
+      }
+    },
+    methods : {
+      handleRegisterFormSubmit(event) {
+        let vm = this
+  
+        axios.post("/api/register",this.registerFormValues)
+        .then((res)=>{
+          vm.registerFormValues = JSON.parse(JSON.stringify(initialFormValue))
+        })
+        .catch((err)=>{
+          console.log("Error:",err)
+        })
+      }
+    }
+  }
+</script>
 
 <style scoped>
 main {
