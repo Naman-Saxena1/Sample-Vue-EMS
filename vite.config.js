@@ -14,7 +14,7 @@ export default defineConfig({
   server: {
     proxy: {
       "/api" : {
-        target: 'http://localhost:1337/',
+        target: 'https://sample-ems-vue-backend-3zl1.vercel.app/',
         changeOrigin: true,
         secure: false,
         rewrite: (path) => path.replace(/^\/api/,"")
