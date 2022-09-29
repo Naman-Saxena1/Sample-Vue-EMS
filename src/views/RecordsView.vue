@@ -46,7 +46,7 @@
         let vm = this;
         if(this.searchCriteria!=="")
         {
-          axios.get(`/records/${this.searchCriteria}`)
+          axios.get(`https://sample-ems-vue-backend-3zl1.vercel.app/records/${this.searchCriteria}`)
           .then(res=>{
             vm.allEmployeesInfo = res.data.allEmployees
             if(res.data.allEmployees.length==0)

@@ -108,7 +108,7 @@
       handleRegisterFormSubmit(event) {
         let vm = this
   
-        axios.post("/register",this.registerFormValues)
+        axios.post("https://sample-ems-vue-backend-3zl1.vercel.app/register",this.registerFormValues)
         .then((res)=>{
           vm.registerFormValues = JSON.parse(JSON.stringify(initialFormValue))
         })
