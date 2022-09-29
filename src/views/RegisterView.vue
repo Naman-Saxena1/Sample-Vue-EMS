@@ -108,7 +108,7 @@
       handleRegisterFormSubmit(event) {
         let vm = this
   
-        axios.post("/api/register",this.registerFormValues)
+        axios.post("/register",this.registerFormValues)
         .then((res)=>{
           vm.registerFormValues = JSON.parse(JSON.stringify(initialFormValue))
         })

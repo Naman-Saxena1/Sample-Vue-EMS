@@ -14,10 +14,9 @@ export default defineConfig({
   server: {
     proxy: {
       "/api" : {
-        target: 'https://sample-ems-vue-backend-3zl1.vercel.app/',
+        target: 'https://sample-ems-vue-backend-3zl1.vercel.app',
         changeOrigin: true,
         secure: false,
-        rewrite: (path) => path.replace(/^\/api/,"")
       }
     }
   }

@@ -11,7 +11,7 @@
 
     <h2 v-if="noRecordFoundMsg!==''" class="noRecordsMessage">{{noRecordFoundMsg}}</h2>
 
-    <template v-for="employeeInfo in allEmployeesInfo" :key="employeeInfo.empid">
+    <template v-for="employeeInfo in allEmployeesInfo" >
       <div class="employee-info-card">
         <h3>Name  : {{employeeInfo.name}}</h3>
         <h3>EmpId : {{employeeInfo.empid}}</h3>
@@ -46,7 +46,7 @@
         let vm = this;
         if(this.searchCriteria!=="")
         {
-          axios.get(`/api/records/${this.searchCriteria}`)
+          axios.get(`/records/${this.searchCriteria}`)
           .then(res=>{
             vm.allEmployeesInfo = res.data.allEmployees
             if(res.data.allEmployees.length==0)
